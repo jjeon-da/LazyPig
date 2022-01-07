@@ -1,0 +1,113 @@
+youtube series:  pt 1 = https://www.youtube.com/watch?v=SlxkmrpJkYQ   &&  https://www.youtube.com/watch?v=4SMKYgXFxuc  &&  https://www.youtube.com/watch?v=rmuQSQeCGmA
+
+
+
+
+dependencies:
+
+install notepad++ = https://notepad-plus-plus.org/downloads/
+
+install 7zip = https://www.7-zip.org/download.html
+
+install winpcap =  https://www.winpcap.org/install/default.htm
+
+install npcap = https://nmap.org/npcap/
+
+https://www.snort.org/#get-started  -->  windows .exe file
+
+https://www.snort.org/downloads/#rule-downloads -->	*look for version equal to the windows installer*  	
+						-->	community rules  = free 
+						-->	registered = free with login
+
+
+
+other useful resources:
+
+https://github.com/Cisco-Talos/snort-faq
+
+
+
+
+
+
+
+1. 	using 7zip:  unzip tar.gz to downloads/snort rules  &&  open folder
+2. 	navigate to c:\snort  (or where ever you installed it)  &&  copy/paste "preproc" and "rules" folders from "downloads" to "snort"
+2A. 		copy/ replace-all
+3.	open config file =  c:\snort\etc\snort.config
+3A.		edit with notepad++
+3A1.			line 45: replace "any" with your "default gateway" IP address in (RUN--> CMD--> IPCONFIG)
+3A2.			line 48: replace "any" with "!$HOME_NET"
+3A3.			line 104: replace "..\rules"  "C:\Snort\rules"
+3A4.			line 105: "SO_RULES" is a linux format,  comment out the line,  add "#" to front
+3A5.			line 106: replace "..\preproc"  with "C:\Snort\preproc_rules"
+3A6.			line 113-14: replace "..\rules"  "C:\Snort\rules"
+
+3A8.			line 186: delete "#" to include logging function make the line read "config logdir: C:\Snort\log"
+3A9.			line 247: replace "/usr/local/lib/snort_dynamicpreprocessor/"  with "C:\Snort\lib\snort_dynamicpreprocessor"
+3A10.			line 250: replace "/usr/local/lib/snort_dynamicengine/libsf_engine.so" with "C:\Snort\lib\snort_dynamicengine\sf_engine.dll"
+3A11.			line 253: not using dynamic detection so, comment out the line,  add "#" to front
+3A12.			line 265-269: not using so, comment out the line,  add "#" to front
+3A13.			line 335: not using so, comment out the line,  add "#" to front
+3A14.			line 418: delete "#" 
+3A15.			line 511: open "c:\snort\rules\blacklist.rules" in notepad++  -->  replace "BLACK" with "WHITE"   -->  save as =  "whitelist.rules"
+3A16.			line 511: change "WHITE_LIST_PATH/white_list.rules" to "WHITE_LIST_PATH\whitelist.rules"
+3A17.			line 512: change "blacklist $BLACK_LIST_PATH/black_list.rules" to "blacklist $BLACK_LIST_PATH\blacklist.rules"
+
+
+3B.		edit with notepad++
+3B1.			line 539:  in section "step 7" find&replace [ctrl+H] "/" with "\" to switch from linux syntax to windows syntax
+3B2.			line 654:  in section "step 8" find&replace [ctrl+H] "/" with "\" to switch from linux syntax to windows syntax
+3B3.			line 658-661: delete "#" 
+3B4.			insert at line 533:  "output alert_csv: alert.csv timestamp,sig_generator,sig_id,sig_rev,msg,proto,src,srcport,dst,dstport,ethsrc,ethdst,ethlen,tcpflags,tcpseq,tcpack,tcpln,tcpwindow,ttl,tos,id,dgmlen,iplen,icmptype,icmpcode,icmpid,icmpseq"       which outputs log into CSV format and uses the columuns specified.  
+
+
+3C.		SAVE FILE
+4.	test Snort to make sure the changes worked
+4A1.		open a command line window:  RUN--> CMD --> run as administrator
+4A2.		cd c:\Snort\bin
+4A3.		snort -V   (double checks the version of snort installed)
+4A4.		snort -W   (lists installed interfaces)	
+4A5.		snort -I 1 -C c:\Snort\etc\snort.conf -T
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
