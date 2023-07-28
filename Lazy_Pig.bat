@@ -1,5 +1,5 @@
 ::
-::  Author T0rt3rra
+::  Author jjeonda https://github.com/jjeon-da
 ::
 @echo off
 TITLE "Lazy Pig SNORT Automator"
